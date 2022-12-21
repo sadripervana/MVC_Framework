@@ -4,7 +4,7 @@ class m0001_initial {
     public function up()
     {
         $db = \app\core\Application::$app->db;
-        $SQL = "CREATE TABLE users (
+        $SQL = "CREATE TABLE users1 (
                 id INT AUTO_INCREMENT PRIMARY KEY,
                 email VARCHAR(255) NOT NULL,
                 firstname VARCHAR(255) NOT NULL,

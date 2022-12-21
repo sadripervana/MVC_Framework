@@ -10,9 +10,9 @@ class User extends UserModel
 	public string $firstname = '';
 	public string $lastname = '';
 	public string $email = '';
-	public int $status = self::STATUS_INACTIVE;
 	public string $password = '';
 	public string $confirmPassword = '';
+	public int $status = self::STATUS_INACTIVE;
 
 	public  static function tableName():string
 	{

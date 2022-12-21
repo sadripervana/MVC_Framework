@@ -10,6 +10,7 @@ class LoginForm extends Model
 {	
 	public string $email = '';
 	public string $password = '';
+
 	public function rules():array
 	{
 		return [
@@ -37,6 +38,6 @@ class LoginForm extends Model
 			$this->addError("password", "Password is incorrect");
 			return false;
 		}
-		Application::$app->login($user);
+		return Application::$app->login($user);
 	}
 }

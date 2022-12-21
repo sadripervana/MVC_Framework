@@ -34,6 +34,7 @@ abstract class Model
 	}
 
 	public array $errors = [];
+
 	public function validate()
 	{
 		foreach($this->rules() as $attribute => $rules){
@@ -49,10 +50,10 @@ abstract class Model
 					$this->addErrorForRule($attribute, self::RULE_REQUIRED);
 				}
 
-				// if($ruleName === self::RULE_EMAIL && filter_var($value, FILTER_VALIDATE_EMAIL)){
+				if($ruleName === self::RULE_EMAIL && !filter_var($value, FILTER_VALIDATE_EMAIL)){
 
-				// 	$this->addErrorForRule($attribute, self::RULE_EMAIL);
-				// }
+					$this->addErrorForRule($attribute, self::RULE_EMAIL);
+				}
 
 				if($ruleName === self::RULE_MIN && strlen($value) < $rule['min']){
 
@@ -94,11 +95,9 @@ abstract class Model
 	public function addErrorForRule(string $attribute, string $rule, $params = [])
 	{
 		$message = $this->errorMessages()[$rule] ?? '';
-		// var_dump($message);die;
 		foreach ($params as $key => $value) {
 			$message = str_replace("{{$key}}", $value, $message);
 		}
-		// var_dump("13");die;
 		$this->errors[$attribute][] = $message;
 	}
 

@@ -13,12 +13,12 @@ class Application
 	public string $userClass;
 	public Router $router;
 	public Request $request;
-	public ?Response $response;
+	public Response $response;
 	public static Application $app;
 	public Controller $controller;
 	public Session $session;
 	public ?DbModel $user;
-	public ?Database $db;
+	public Database $db;
 
 	public function __construct($rootPath, array $config)
 	{	
@@ -31,10 +31,11 @@ class Application
 		$this->controller = new Controller();
 		$this->router = new Router($this->request, $this->response);
 		$this->db = new Database($config['db']);
+
 		$primaryValue = $this->session->get('user');
 		if($primaryValue){
 			$primaryKey = $this->userClass::primaryKey();
-			$this->userClass::findOne([$primaryKey=> $primaryValue]);
+			$this->user = $this->userClass::findOne([$primaryKey=> $primaryValue]);
 		} else {
 			$this->user = null;
 		}
@@ -75,7 +76,7 @@ class Application
 	public static function isGuest()
 	{	
 
-		return !self::$app->user?? '';
+		return !self::$app->user;
 	}
 	
 }

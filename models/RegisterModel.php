@@ -36,8 +36,9 @@ class RegisterModel extends Model
 			'password' => [
 				self::RULE_REQUIRED, 
 				[self::RULE_MIN,
-		    'min' => 8],[self::RULE_MAX], 
-		    'max' => 24
+			    'min' => 8],[self::RULE_MAX, 
+			    'max' => 24
+			    ]
 			],
 			'confirmPassword' => [self::RULE_REQUIRED,
 				[self::RULE_MATCH, 'match'=> 'password']]

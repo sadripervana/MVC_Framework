@@ -29,7 +29,7 @@ class Database
 				continue;
 			}
 
-			require_once Application::$ROOT_DIR . '/migrations'.$migration;
+			require_once Application::$ROOT_DIR . '/migrations/'.$migration;
 			$className = pathinfo($migration, PATHINFO_FILENAME);
 			$instance = new $className();
 			$this->log("Applying Migration $migration") ;
@@ -38,7 +38,7 @@ class Database
 			$newMigrations[] = $migration;
 		}
 
-		if(!empty($newMigration)){
+		if(!empty($newMigrations)){
 			$this->saveMigrations($newMigrations);
 		} else {
 			$this->log("All migrations are applied");
@@ -65,9 +65,12 @@ class Database
 	public function saveMigrations(array $migrations)
 	{	
 		$str = implode(",",array_map(fn($m) =>"('$m')", $migrations));
-		$statement = $this->pdo->prepare("INSERT INTO migrations(migration) VALUES 
+		$statement = $this->pdo->prepare("INSERT INTO migrations (migration) VALUES 
 			$str
 			");
+		echo "<pre>";
+				var_dump($str);
+		echo "</pre>";
 		$statement->execute();
 	} 
 
