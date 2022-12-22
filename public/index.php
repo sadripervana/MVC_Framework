@@ -36,7 +36,7 @@ $app->router->get('/login/{id}', [AuthController::class, 'login']);
 $app->router->post('/login', [AuthController::class, 'login']);
 $app->router->get('/logout', [AuthController::class, 'logout']);
 $app->router->get('/contact', [SiteController::class, 'contact']);
-$app->router->post('/contact', [SiteController::class, 'handleContact']);
+$app->router->post('/contact', [SiteController::class, 'contact']);
 $app->router->get('/about', [AboutController::class, 'index']);
 $app->router->get('/profile', [AuthController::class, 'profile']);
 $app->router->get('/profile/{id:\d+}/{username}', [SiteController::class, 'login']);

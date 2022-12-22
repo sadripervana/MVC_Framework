@@ -8,6 +8,7 @@ use app\core\Request;
 use app\core\Response;
 use app\models\User;
 use app\models\LoginForm;
+use app\models\ContactForm;
 
 
 class SiteController extends Controller
@@ -36,15 +37,19 @@ class SiteController extends Controller
         return $this->render('home', $params);
     }
 
-    public function contact()
-    {
-        return $this->render('contact');
-    }
-
-    public function handleContact(Request $request)
+    public function contact(Request $request, Response $response)
     {   
-        $body = $request->getBody();
-        return 'Handling submitted data';
+        $contact = new ContactForm();
+        if($request->isPost()){
+            $contact->loadData($request->getBody());
+            if($contact->validate() && $contact->send()){
+                Application::$app->session->setFlash("success","Thanks for contacting us.");
+                return $response->redirect('/contact');
+            }
+        }
+        return $this->render('contact',[
+            'model' => $contact
+        ]);
     }
 
     public function register(Request $request)

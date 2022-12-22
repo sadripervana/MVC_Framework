@@ -1,3 +1,7 @@
+<?php 
+/** @var $this \app\core\Viwe */
+$this->title = "Register";
+ ?>
 <?php use \app\core\form\Form; 
 /** @var $model \app\models\User **/ 
 ?>

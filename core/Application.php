@@ -1,7 +1,7 @@
 <?php 
 
 namespace app\core;
-use app\core\Database;
+use app\core\db\Database;
 use app\core\Controller;
 use app\core\Request;
 use app\core\Session;
@@ -18,8 +18,9 @@ class Application
 	public static Application $app;
 	public ?Controller $controller = null;
 	public Session $session;
-	public ?DbModel $user;
+	public ?UserModel $user;
 	public Database $db;
+	public View $view;
 
 	public function __construct($rootPath, array $config)
 	{	
@@ -31,6 +32,7 @@ class Application
 		$this->session = new Session();
 		$this->controller = new Controller();
 		$this->router = new Router($this->request, $this->response);
+		$this->view = new View();
 		$this->db = new Database($config['db']);
 
 		$primaryValue = $this->session->get('user');
@@ -49,7 +51,7 @@ class Application
 		echo $this->router->resolve();						
 	} catch(\Exception $e){
 		$this->response->setStatusCode($e->getCode());
-		echo $this->router->renderView('_error',[
+		echo $this->view->renderView('_error',[
 			'exception' => $e]);
 	}
 	}
@@ -64,7 +66,7 @@ class Application
 		$this->controller = $controller;
 	}
 
-	public function login(DbModel $user)
+	public function login(UserModel $user)
 	{
 		$this->user = $user;
 		$primaryKey = $user->primaryKey();
