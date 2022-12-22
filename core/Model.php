@@ -39,7 +39,6 @@ abstract class Model
 	{
 		foreach($this->rules() as $attribute => $rules){
 			$value = $this->{$attribute};
-				// var_dump($this->rules());die;
 			foreach($rules as $rule){
 				$ruleName = $rule;
 				if(!is_string($ruleName)){
@@ -64,7 +63,6 @@ abstract class Model
 
 					$this->addErrorForRule($attribute, self::RULE_MAX, $rule);
 				}
-				// var_dump($rule);die;
 				if(isset($rule['match'])){
 					if($ruleName === self::RULE_MATCH && $value !== $this->{$rule['match']}){
 					$rule['match'] = $this->getLabel($rule['match']);
@@ -78,7 +76,6 @@ abstract class Model
 					$uniqueAttr = $rule['attribute'] ?? $attribute;
 					$tableName = $className::tableName();
 					$statement = Application::$app->db->pdo->prepare("SELECT * FROM $tableName WHERE $uniqueAttr = :$uniqueAttr");
-					// var_dump($statement);die;
 					$statement->bindValue(":$uniqueAttr", $value);
 					$statement->execute();
 					$record = $statement->fetchObject();
@@ -92,7 +89,7 @@ abstract class Model
 		return empty($this->errors);
 	}
 
-	public function addErrorForRule(string $attribute, string $rule, $params = [])
+	private function addErrorForRule(string $attribute, string $rule, $params = [])
 	{
 		$message = $this->errorMessages()[$rule] ?? '';
 		foreach ($params as $key => $value) {

@@ -19,9 +19,6 @@ class Field
 
 	public function __toString()
 	{	
-
-		// var_dump($this->model->labels()[$this->attribute]);die;
-
 		return sprintf(
 			'<div class="form-group">
 			<label>%s</label>

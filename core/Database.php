@@ -68,9 +68,6 @@ class Database
 		$statement = $this->pdo->prepare("INSERT INTO migrations (migration) VALUES 
 			$str
 			");
-		echo "<pre>";
-				var_dump($str);
-		echo "</pre>";
 		$statement->execute();
 	} 
 
