@@ -28,7 +28,7 @@ class AuthController extends Controller
             $loginForm->loadData($request->getBody());
             if($loginForm->validate() && $loginForm->login()){
                 $response->redirect('/');
-                // Application::$app->login();
+                Application::$app->login();
                 return;
             }
         }
@@ -49,9 +49,6 @@ class AuthController extends Controller
 				return "success";
 			}
 			$firstname = $user->firstname;
-			if(!$firstname){
-				$errors['firstname'] = 'This field is required';
-			}
 			$firstname = $request->getBody()['firstname'];
 			$user->loadData($request->getBody());
 

@@ -61,7 +61,7 @@ class SiteController extends Controller
 
             if($user->validate() && $user->save()){
 
-                Application::$app->session->setFlash('success','Thanks for registering');
+                Application::$app->session->setFlash("success","Thanks for registering");
                 Application::$app->response->redirect('/');
                 exit;
             }

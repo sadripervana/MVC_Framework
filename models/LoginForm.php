@@ -31,7 +31,7 @@ class LoginForm extends Model
 	{	
 		$user = User::findOne(['email'=>$this->email]);
 		if(!$user){
-			$this->addErrorForRule('email','User dos not exitst with this email');
+			$this->addError('email','User dos not exitst with this email');
 			return false;
 		}
 		if(!password_verify($this->password, $user->password)){

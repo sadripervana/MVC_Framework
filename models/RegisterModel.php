@@ -1,6 +1,7 @@
 <?php 
 namespace app\models;
 use app\core\Model;
+use app\core\Application;
 
 class RegisterModel extends Model
 {
@@ -12,7 +13,8 @@ class RegisterModel extends Model
 
 	public function register()
 	{
-		echo "Creating new user";
+		 Application::$app->session->setFlash("success","Thanks for registering");
+		 Application::$app->response->redirect('/');
 	
 	}
 	public function labels():array
@@ -36,7 +38,8 @@ class RegisterModel extends Model
 			'password' => [
 				self::RULE_REQUIRED, 
 				[self::RULE_MIN,
-			    'min' => 8],[self::RULE_MAX, 
+			    'min' => 8],
+			    [self::RULE_MAX, 
 			    'max' => 24
 			    ]
 			],

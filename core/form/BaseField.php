@@ -30,7 +30,7 @@ abstract class BaseField
 	        ',
 	        $this->model->getLabel($this->attribute),
 	        $this->renderInput(),
-	        $this->model->getFirstError($this->attribute)[0]??''
+	        $this->model->getFirstError($this->attribute) ?? ''
 		);
 	}
 }
