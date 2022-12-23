@@ -8,7 +8,7 @@
   </head>
   <body>
   	
-    <div class="contaner">
+    <div class="container">
     {{content}}
       
     </div>

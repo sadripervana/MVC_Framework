@@ -137,6 +137,5 @@ abstract class Model
     {
         $errors = $this->errors[$attribute] ?? [];
         return $errors[0] ?? '';
-        // return $this->errors[$attribute][0] ?? false;
     }
 }

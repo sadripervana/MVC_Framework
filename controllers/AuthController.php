@@ -54,7 +54,7 @@ class AuthController extends Controller
 
 			if($user->validate() && $user->save()){
 
-				Application::$app->response->setFlash('success','Thanks for registering');
+				Application::$app->session->setFlash("success","Thanks for registering");
 				Application::$app->response->redirect('/');
 				exit;
 			}
