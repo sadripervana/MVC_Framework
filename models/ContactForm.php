@@ -14,8 +14,8 @@ class ContactForm extends Model
 	{
 		return [
 			'subject' => [self::RULE_REQUIRED],
-			'email' => [self::RULE_REQUIRED],
-			'body' => [self::RULE_REQUIRED],
+			'email' => [self::RULE_REQUIRED,self::RULE_EMAIL],
+			'body' => [self::RULE_REQUIRED]
 		];
 	}
 
@@ -37,7 +37,7 @@ class ContactForm extends Model
 	{
 		return 'contactus';
 	}
-	
+
 	public function attributes():array
 	{
 		return ['subject', 'email', 'body'];		
@@ -50,9 +50,6 @@ class ContactForm extends Model
         $params = array_map(fn($attr) => ":$attr", $attributes);
         $statement = self::prepare("INSERT INTO $tableName (" . implode(",", $attributes) . ") 
                 VALUES (" . implode(",", $params) . ")");
-		echo "<pre>";
-				var_dump($statement);
-		echo "</pre>";
         foreach ($attributes as $attribute) {
             $statement->bindValue(":$attribute", $this->{$attribute});
         }
