@@ -3,6 +3,7 @@
 /** @var $model \app\models\ContactForm */
 use app\core\form\TextareaField;
 $this->title = "Contact";
+
  ?>
 
 <h1>Contact us</h1>

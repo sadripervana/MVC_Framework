@@ -44,7 +44,9 @@
               <li class="nav-item">
                 <a class="nav-link active" aria-current="page" href="/logout">Welcome 
                   <?php 
-                 echo Application::$app->user->getDisplayName();?> (Logout)</a>
+                 echo Application::$app->user->getDisplayName();
+                 ;
+               ?> (Logout)</a>
               </li>
             </ul>
           <?php endif; ?>

@@ -1,10 +1,4 @@
 <?php
-/**
- * User: TheCodeholic
- * Date: 7/8/2020
- * Time: 9:16 AM
- */
-
 namespace app\core;
 
 abstract class Model

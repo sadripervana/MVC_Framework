@@ -8,6 +8,7 @@ use app\core\Request;
 use app\core\Response;
 use app\models\User;
 use app\models\LoginForm;
+use app\models\Profile;
 use app\models\ContactForm;
 
 
@@ -37,6 +38,23 @@ class SiteController extends Controller
         return $this->render('home', $params);
     }
 
+    public function profile(Request $request, Response $response)
+    {
+        $profileForm = new Profile();
+        if($request->isPost()){
+            $profileForm->loadData($request->getBody());
+            if($profileForm->validate() && $profileForm->update()){
+                Application::$app->session->setFlash("success","Thanks for Updating.");
+                $response->redirect('/');
+                return;
+            }
+            return $this->render('profile', ['model' => $profileForm]);
+        }
+        return $this->render('profile',[
+            'model' => $profileForm
+        ]);
+    }
+
     public function contact(Request $request, Response $response)
     {   
         $contact = new ContactForm();
@@ -47,6 +65,7 @@ class SiteController extends Controller
                 return $response->redirect('/');
             }
         }
+        
         return $this->render('contact',[
             'model' => $contact
         ]);

@@ -12,6 +12,7 @@ class User extends UserModel
 	public string $email = '';
 	public string $password = '';
 	public string $confirmPassword = '';
+	public string $image = '';
 	public int $status = self::STATUS_INACTIVE;
 
 	public  static function tableName():string
@@ -46,7 +47,7 @@ class User extends UserModel
 
 	public function attributes():array
 	{
-		return ['firstname', 'lastname', 'email', 'password', 'status'];		
+		return ['firstname', 'lastname', 'email', 'password', 'status','image'];		
 	}
 
 	public function labels():array
@@ -58,6 +59,15 @@ class User extends UserModel
 			'password' => 'Password',
 			'confirmPassword' => 'Confirm password',
 		];	
+	}
+
+	public function email()
+	{
+		return $this->email;
+	}
+	public static function imagePerson()
+	{
+		return $this->image;
 	}
 
 	public function getDisplayName():string

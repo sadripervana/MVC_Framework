@@ -9,6 +9,7 @@ use app\core\Application;
 use app\models\RegisterModel;
 use app\models\LoginForm;
 use app\models\User;
+use app\models\Profile;
 use app\core\middlewares\AuthMiddleware;
 
 
@@ -37,6 +38,23 @@ class AuthController extends Controller
             'model' => $loginForm
         ]);
     }
+
+	public function update(Request $request, Response $response)
+	{
+		$profileForm = new Profile();
+		if($request->isPost()){
+			$profileForm->loadData($request->getBody());
+			if($profileForm->validate() && $profileForm->update()){
+				Application::$app->session->setFlash("success","Thanks for Updating.");
+				$response->redirect('/');
+				return;
+			}
+			return $this->render('profile', ['model' => $profileForm]);
+		}
+		return $this->render('profile',[
+            'model' => $profileForm
+        ]);
+	}
 
 	public function register(Request $request)
 	{	
